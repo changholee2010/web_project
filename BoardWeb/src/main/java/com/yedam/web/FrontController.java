@@ -49,6 +49,7 @@ public class FrontController extends HttpServlet {
 		map.put("/removeMember.do", new RemoveMemberControl()); // 삭제처리.
 
 		// 나도 수정했어...
+		// 수정완료..
 
 	}
 
