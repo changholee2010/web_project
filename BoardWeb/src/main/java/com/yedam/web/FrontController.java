@@ -47,6 +47,8 @@ public class FrontController extends HttpServlet {
 		map.put("/modifyForm.do", new ModFormControl()); // 수정화면 호출.
 		map.put("/modifyMember.do", new ModifyMemberControl()); // 수정처리.
 		map.put("/removeMember.do", new RemoveMemberControl()); // 삭제처리.
+		
+		// 기능을 추가합니다.
 
 	}
 
