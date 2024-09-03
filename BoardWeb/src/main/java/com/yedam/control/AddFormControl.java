@@ -18,6 +18,8 @@ public class AddFormControl implements Control {
 		request.setAttribute("msg", "Hello, World"); // request 객체에 msg 전달.
 		request.getRequestDispatcher("WEB-INF/html/addForm.jsp")//
 				.forward(request, response);
+		
+		// 커밋테스트하려고 수정했습니다.
 
 	}
 
