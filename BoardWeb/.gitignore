@@ -2,5 +2,6 @@
 /target/
 /.settings/
 /javaprogram/
+/bin/
 /.classpath
 /.project
