@@ -1,6 +1,8 @@
 package com.yedam.control.board;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -8,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.yedam.common.Control;
-import com.yedam.common.ModelVO;
 import com.yedam.service.BoardService;
 import com.yedam.service.BoardServiceImpl;
 import com.yedam.vo.BoardVO;
@@ -30,10 +31,10 @@ public class BoardControl implements Control {
 		request.setAttribute("board", board);
 
 		// ModelVO로 변경해서 값을 담는다.
-		ModelVO model = new ModelVO();
-		model.addProp("searchCondition", sc);
-		model.addProp("keyword", kw);
-		model.addProp("page", page);
+		Map<String, String> model = new HashMap<>();
+		model.put("searchCondition", sc);
+		model.put("keyword", kw);
+		model.put("page", page);
 
 		// jsp페이지에 전달.
 		request.setAttribute("model", model);

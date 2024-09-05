@@ -5,6 +5,7 @@
 
 <jsp:include page="../includes/header.jsp"></jsp:include>
 <h3>게시글 목록</h3>
+<p>${model }</p>
 <div class="center">
   <form action="boardList.do">
     <div class="row">
@@ -12,14 +13,14 @@
       <div class="col-sm-4">
         <select name="searchCondition" class="form-control">
           <option value="">선택하세요</option>
-          <option value="T" ${sc eq 'T' ? 'selected' : '' }>제목</option>
-          <option value="W" ${sc eq 'W' ? 'selected' : '' }>작성자</option>
-          <option value="TW" ${sc eq 'TW' ? 'selected' : '' }>제목 & 작성자</option>
+          <option value="T" ${model.searchCondition eq 'T' ? 'selected' : '' }>제목</option>
+          <option value="W" ${model.searchCondition eq 'W' ? 'selected' : '' }>작성자</option>
+          <option value="TW" ${model.searchCondition eq 'TW' ? 'selected' : '' }>제목 & 작성자</option>
         </select>
       </div>
       <!-- 키워드 -->
       <div class="col-sm-5">
-        <input type="text" name="keyword" value="${kw }" class="form-control">
+        <input type="text" name="keyword" value="${model.keyword }" class="form-control">
       </div>
       <!-- 조회버튼 -->
       <div class="col-sm-2">
@@ -52,7 +53,7 @@
             <td>
               <c:out value="${board.boardNo }" />
             </td>
-            <td><a href="getBoard.do?keyword=${kw }&searchCondition=${sc }&page=${paging.page }&bno=${board.boardNo }">${board.title }</a></td>
+            <td><a href="getBoard.do?keyword=${model.keyword }&searchCondition=${model.searchCondition }&page=${model.page }&bno=${board.boardNo }">${board.title }</a></td>
             <td>${board.writer }</td>
             <td>${board.viewCnt }</td>
             <td>
@@ -68,7 +69,7 @@
       <ul class="pagination">
 
         <li class="page-item ${paging.prev ? '' : 'disabled'} ">
-          <a class="page-link" href="boardList.do?keyword=${kw }&searchCondition=${sc }&page=${paging.startPage-1 }">Previous</a>
+          <a class="page-link" href="boardList.do?keyword=${model.keyword }&searchCondition=${model.searchCondition }&page=${paging.startPage-1 }">Previous</a>
         </li>
 
         <c:forEach var="pg" begin="${paging.startPage }" end="${paging.endPage }">
@@ -76,38 +77,24 @@
             <c:when test="${paging.page == pg }">
               <!-- 현재 페이징. -->
               <li class="page-item active" aria-current="page">
-                <a class="page-link" href="boardList.do?keyword=${kw }&searchCondition=${sc }&page=${pg }">${pg }</a>
+                <a class="page-link" href="boardList.do?keyword=${model.keyword }&searchCondition=${model.searchCondition }&page=${pg }">${pg }</a>
               </li>
             </c:when>
             <c:otherwise>
               <!-- 현재 페이지 아닌 경우. -->
               <li class="page-item">
-                <a class="page-link" href="boardList.do?keyword=${kw }&searchCondition=${sc }&page=${pg }">${pg }</a>
+                <a class="page-link" href="boardList.do?keyword=${model.keyword }&searchCondition=${model.searchCondition }&page=${pg }">${pg }</a>
               </li>
             </c:otherwise>
           </c:choose>
         </c:forEach>
 
         <li class="page-item ${paging.next ? '' : 'disabled'}">
-          <a class="page-link" href="boardList.do?keyword=${kw }&searchCondition=${sc }&page=${paging.endPage+1 }">Next</a>
+          <a class="page-link" href="boardList.do?keyword=${model.keyword }&searchCondition=${model.searchCondition }&page=${paging.endPage+1 }">Next</a>
         </li>
       </ul>
     </nav>
   </c:otherwise>
 </c:choose>
-
-
-
-<p>${'문자열, 숫자, boolean null' }</p>
-<p>${3+5 > 10 ? '참입니다' : '거짓입니다' }</p>
-
-<c:set var="name" value="Hongkildong"></c:set>
-<c:out value="${name }"></c:out>
-<c:set var="age" value="20"></c:set>
-<c:out value="${age >= 20 ? '성인' : '미성년' }"></c:out>
-
-<c:if test="${name ne '2Hongkildong' }">
-  <p>틀렸습니다</p>
-</c:if>
 
 <jsp:include page="../includes/footer.jsp"></jsp:include>

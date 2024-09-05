@@ -1,7 +1,9 @@
 package com.yedam.control.board;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,7 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.yedam.common.Control;
-import com.yedam.common.ModelVO;
 import com.yedam.common.PageDTO;
 import com.yedam.common.SearchDTO;
 import com.yedam.service.BoardService;
@@ -45,6 +46,15 @@ public class BoardListControl implements Control {
 			int totalCnt = svc.getTotalCnt(search);
 			PageDTO paging = new PageDTO(Integer.parseInt(page), totalCnt);
 			request.setAttribute("paging", paging);
+
+			// ModelVO로 변경해서 값을 담는다.
+			Map<String, String> model = new HashMap<>();
+			model.put("searchCondition", sc);
+			model.put("keyword", kw);
+			model.put("page", page);
+
+			// jsp페이지에 전달.
+			request.setAttribute("model", model);
 
 		} // end of if.
 

@@ -40,9 +40,9 @@
 
 <!-- 컨트롤 이동하기 위한 폼. -->
 <form action="removeBoard.do" name="actForm">
-  <input type="hidden" name="keyword" value="${kw }">
-  <input type="hidden" name="searchCondition" value="${sc }">
-  <input type="hidden" name="page" value="${page }">
+  <input type="hidden" name="keyword" value="${model.keyword }">
+  <input type="hidden" name="searchCondition" value="${model.searchCondition }">
+  <input type="hidden" name="page" value="${model.page }">
   <input type="hidden" name="bno" value="${board.boardNo }">
 </form>
 

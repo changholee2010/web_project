@@ -12,7 +12,10 @@
 </style>
 <h3>수정화면</h3>
 <form action="modifyBoard.do" method="post" enctype="multipart/form-data">
-  <input type="hidden" name="writer" value="${board.writer }">
+  <input type="hidden" name="bno" value="${board.boardNo }">
+  <input type="hidden" name="searchCondition" value="${model.searchCondition }">
+  <input type="hidden" name="keyword" value="${model.keyword }">
+  <input type="hidden" name="page" value="${model.page }">
   <table class="table">
     <tr>
       <th>제목</th>

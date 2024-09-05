@@ -1,6 +1,8 @@
 package com.yedam.control.board;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -30,12 +32,18 @@ public class ModifyBoardControl implements Control {
 				, "utf-8" // 4.인코딩
 				, new DefaultFileRenamePolicy() // 5.리네임정책
 		);
+		String sc = mr.getParameter("searchCondition");
+		String kw = mr.getParameter("keyword");
+		String page = mr.getParameter("page");
+
 		String title = mr.getParameter("title");
 		String content = mr.getParameter("content");
 		String writer = mr.getParameter("writer");
+		String bno = mr.getParameter("bno");
 		String img = mr.getFilesystemName("srcImage");
 
 		BoardVO board = new BoardVO();
+		board.setBoardNo(Integer.parseInt(bno));
 		board.setTitle(title);
 		board.setContent(content);
 		board.setWriter(writer);
@@ -44,7 +52,7 @@ public class ModifyBoardControl implements Control {
 		BoardService svc = new BoardServiceImpl();
 		svc.modifyBoard(board);
 
-		response.sendRedirect("boardList.do");
+		response.sendRedirect("boardList.do?page=" + page + "&searchCondition=" + sc + "&keyword=" + kw);
 
 	}
 
