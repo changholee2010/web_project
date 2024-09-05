@@ -54,6 +54,9 @@
 	        <if test="content != null">
 	          ,content = #{content}
 	        </if>
+	        <if test="image != null">
+	          ,image = #{image}
+	        </if>
 	    </set>    
 	    where board_no = #{boardNo}
 	</update>

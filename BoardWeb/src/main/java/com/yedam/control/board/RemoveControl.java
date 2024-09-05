@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.yedam.common.Control;
+import com.yedam.common.ModelVO;
 import com.yedam.service.BoardService;
 import com.yedam.service.BoardServiceImpl;
 import com.yedam.vo.BoardVO;
@@ -19,11 +20,11 @@ public class RemoveControl implements Control {
 		// bno(글삭제용도), page(page로 이동)
 
 		String bno = request.getParameter("bno"); // 상세조회할 게시글번호.
-		String page = request.getParameter("page");
 
 		// 검색조건. searchCondition & keyword.
 		String sc = request.getParameter("searchCondition");
 		String kw = request.getParameter("keyword");
+		String page = request.getParameter("page");
 
 		// 로그인 정보.
 		HttpSession session = request.getSession();
@@ -45,7 +46,7 @@ public class RemoveControl implements Control {
 
 		// 게시글 삭제.
 		if (svc.removeBoard(Integer.parseInt(bno))) {
-			response.sendRedirect("boardList.do?page=" + page +"&searchCondition=" + sc + "&keyword=" + kw);
+			response.sendRedirect("boardList.do?page=" + page + "&searchCondition=" + sc + "&keyword=" + kw);
 		}
 
 	}

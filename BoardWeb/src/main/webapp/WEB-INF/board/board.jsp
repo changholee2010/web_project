@@ -5,7 +5,7 @@
 
 <jsp:include page="../includes/header.jsp"></jsp:include>
 <h3>글 상세 페이지.</h3>
-
+<p>${model }</p>
 <table class="table">
   <tr>
     <th>글번호</th>

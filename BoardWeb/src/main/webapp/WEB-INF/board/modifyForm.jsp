@@ -1,6 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <jsp:include page="../includes/header.jsp"></jsp:include>
+<style>
+  #srcImage {
+    position: relative;
+    left: -210px;
+    background: white;
+    display: inline-block;
+    width: 300px;
+  }
+</style>
 <h3>수정화면</h3>
 <form action="modifyBoard.do" method="post" enctype="multipart/form-data">
   <input type="hidden" name="writer" value="${board.writer }">
@@ -19,7 +28,7 @@
     </tr>
     <tr>
       <th>이미지</th>
-      <td><input type="file" name="srcImage"></td>
+      <td><input type="file" name="srcImage"><span id="srcImage">${board.image }</span></td>
     </tr>
     <tr>
       <td colspan="2" align="center">
@@ -29,4 +38,13 @@
     </tr>
   </table>
 </form>
+
+<script>
+  // 이미지를 선택하면 span태그의 내용을 변경해주도록 해야한다.
+  document.querySelector('input[name="srcImage"]').addEventListener('change', function (e) {
+    console.log(e.target.files[0].name);
+    document.getElementById('srcImage').innerText = e.target.files[0].name;
+
+  })
+</script>
 <jsp:include page="../includes/footer.jsp"></jsp:include>

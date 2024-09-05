@@ -36,7 +36,7 @@ public class LoginControl implements Control {
 		session.setAttribute("logid", id);
 		session.setAttribute("logName", member.getMemberName());
 
-		response.sendRedirect("boardList.do");
+		response.sendRedirect("main.do");
 
 	}
 
