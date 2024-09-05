@@ -5,13 +5,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.yedam.common.Control;
-import com.yedam.control.AddBoardControl;
-import com.yedam.control.BoardControl;
-import com.yedam.control.BoardFormControl;
-import com.yedam.control.BoardListControl;
-import com.yedam.control.ModifyBoardControl;
-import com.yedam.control.ModifyFormControl;
-import com.yedam.control.RemoveControl;
+import com.yedam.control.board.AddBoardControl;
+import com.yedam.control.board.BoardControl;
+import com.yedam.control.board.BoardFormControl;
+import com.yedam.control.board.BoardListControl;
+import com.yedam.control.board.ModifyBoardControl;
+import com.yedam.control.board.ModifyFormControl;
+import com.yedam.control.board.RemoveControl;
 
 public class MenuBoard {
 	private static MenuBoard instance = new MenuBoard();

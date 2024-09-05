@@ -1,4 +1,4 @@
-package com.yedam.control;
+package com.yedam.control.member;
 
 import java.io.IOException;
 import java.io.PrintWriter;

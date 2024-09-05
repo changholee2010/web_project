@@ -4,16 +4,16 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.yedam.common.Control;
-import com.yedam.control.AddFormControl;
-import com.yedam.control.AddMemberControl;
-import com.yedam.control.GetMemberControl;
-import com.yedam.control.LoginControl;
-import com.yedam.control.LoginFormControl;
-import com.yedam.control.LogoutControl;
-import com.yedam.control.MemberListControl;
-import com.yedam.control.ModFormControl;
-import com.yedam.control.ModifyMemberControl;
-import com.yedam.control.RemoveMemberControl;
+import com.yedam.control.board.AddFormControl;
+import com.yedam.control.member.AddMemberControl;
+import com.yedam.control.member.GetMemberControl;
+import com.yedam.control.member.LoginControl;
+import com.yedam.control.member.LoginFormControl;
+import com.yedam.control.member.LogoutControl;
+import com.yedam.control.member.MemberListControl;
+import com.yedam.control.member.ModFormControl;
+import com.yedam.control.member.ModifyMemberControl;
+import com.yedam.control.member.RemoveMemberControl;
 
 //회원관련 메뉴와 컨트롤 등록. 팀장.
 public class MenuMember {

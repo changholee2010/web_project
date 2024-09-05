@@ -1,6 +1,7 @@
-package com.yedam.control;
+package com.yedam.control.member;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -11,22 +12,18 @@ import com.yedam.service.MemberService;
 import com.yedam.service.MemberServiceImpl;
 import com.yedam.vo.MemberVO;
 
-public class ModFormControl implements Control {
+public class MemberListControl implements Control {
 
 	@Override
 	public void exec(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		// 회원아이디 파라미터: id
-		String id = request.getParameter("id");
 
-		// 조회한 정보를 jsp 전달.
 		MemberService svc = new MemberServiceImpl();
-		MemberVO mvo = svc.getMember(id);
+		List<MemberVO> list = svc.getMembers();
 
-		request.setAttribute("memberInfo", mvo);
-
-		request.getRequestDispatcher("WEB-INF/html/modifyForm.jsp").forward(request, response);
-
+		request.setAttribute("memberList", list);
+		request.getRequestDispatcher("WEB-INF/html/memberList.jsp")//
+				.forward(request, response);
 	}
 
 }

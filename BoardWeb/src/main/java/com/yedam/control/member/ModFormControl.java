@@ -1,4 +1,4 @@
-package com.yedam.control;
+package com.yedam.control.member;
 
 import java.io.IOException;
 
@@ -11,7 +11,7 @@ import com.yedam.service.MemberService;
 import com.yedam.service.MemberServiceImpl;
 import com.yedam.vo.MemberVO;
 
-public class GetMemberControl implements Control {
+public class ModFormControl implements Control {
 
 	@Override
 	public void exec(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -25,7 +25,7 @@ public class GetMemberControl implements Control {
 
 		request.setAttribute("memberInfo", mvo);
 
-		request.getRequestDispatcher("WEB-INF/html/memberInfo.jsp").forward(request, response);
+		request.getRequestDispatcher("WEB-INF/html/modifyForm.jsp").forward(request, response);
 
 	}
 
