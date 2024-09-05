@@ -45,13 +45,6 @@ public class FrontController extends HttpServlet {
 		map.putAll(memberMenu);// 멤버관련 메뉴추가.
 		map.putAll(boardMenu); // 게시글관련 메뉴추가.
 
-		// 기능을 추가합니다.
-
-		// 나도 수정했어...
-
-		// 수정완료..
-		// 수정완료2..
-
 	}
 
 	// HttpServletRequest

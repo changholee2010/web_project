@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yedam.mapper.BoardMapper">
+
+	<select id="selectList" resultType="board">
+	    select board_no
+	          ,title
+	          ,content
+	          ,writer
+	          ,view_cnt
+	          ,creation_date
+	    from tbl_board
+	    order by board_no desc
+	</select>
+	
+	<select id="selectListPaging" resultType="board" parameterType="com.yedam.common.SearchDTO">
+        select c.*
+        from (select rownum rn, b.*
+              from (select *
+                    from tbl_board
+                    where 
+                    <choose>
+                      <when test="searchCondition == 'T'.toString() ">
+                        title like '%'||#{keyword}||'%'
+                      </when>
+                      <when test="searchCondition == 'W'.toString() ">
+                        writer like '%'||#{keyword}||'%'
+                      </when>
+                      <otherwise>
+                        title like '%'||#{keyword}||'%' or writer like '%'||#{keyword}||'%'
+                      </otherwise>
+                    </choose>
+                    order by board_no desc) b
+              <![CDATA[
+              where rownum <= #{page} * 5 ) c
+              ]]>
+        where c.rn > (#{page} - 1) * 5
+	</select>
+	
+	<insert id="insertBoard" parameterType="board">
+	    insert into tbl_board (board_no, title, content, writer, image)
+        values(board_seq.nextval, #{title}, #{content}, #{writer}, #{image})
+	</insert>
+
+	<update id="updateBoard" parameterType="board">
+	    update tbl_board
+	    <set>
+	        <if test="title != null">
+		       title = #{title}
+	        </if>
+	        <if test="content != null">
+	          ,content = #{content}
+	        </if>
+	    </set>    
+	    where board_no = #{boardNo}
+	</update>
+	
+	<delete id="deleteBoard" parameterType="int">
+	    delete from tbl_board
+	    where board_no = #{boardNo}
+	</delete>
+	
+	<select id="selectBoard" parameterType="int" resultType="board">
+	    select board_no
+	          ,title
+	          ,content
+	          ,writer
+	          ,view_cnt
+	          ,creation_date
+	          ,image
+	    from tbl_board
+	    where board_no = #{boardNo}
+	</select>
+	
+	<select id="selectCount" resultType="int" parameterType="com.yedam.common.SearchDTO">
+	    select count(1)
+	    from tbl_board
+	    where
+	    <choose>
+          <when test="searchCondition == 'T'.toString() ">
+            title like '%'||#{keyword}||'%'
+          </when>
+          <when test="searchCondition == 'W'.toString() ">
+            writer like '%'||#{keyword}||'%'
+          </when>
+          <otherwise>
+            title like '%'||#{keyword}||'%' or writer like '%'||#{keyword}||'%'
+          </otherwise>
+        </choose>
+	</select>
+	
+	<update id="updateViewCnt" parameterType="int">
+	    update tbl_board
+	    set view_cnt = view_cnt + 1
+	    where board_no = #{boardNo}
+	</update>
+
+</mapper>

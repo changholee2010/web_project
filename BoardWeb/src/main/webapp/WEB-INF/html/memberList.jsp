@@ -10,7 +10,6 @@
   // memberList.jsp -> memberList_jsp.java -> memberList_jsp.class 실행.
   List<MemberVO> list = (List<MemberVO>) request.getAttribute("memberList");
   %>
-  
   <h3>회원목록</h3>
   <table class="table">
     <thead>

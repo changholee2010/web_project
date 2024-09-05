@@ -5,6 +5,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.yedam.common.Control;
+import com.yedam.control.AddBoardControl;
+import com.yedam.control.BoardControl;
+import com.yedam.control.BoardFormControl;
+import com.yedam.control.BoardListControl;
+import com.yedam.control.ModifyBoardControl;
+import com.yedam.control.ModifyFormControl;
+import com.yedam.control.RemoveControl;
 
 public class MenuBoard {
 	private static MenuBoard instance = new MenuBoard();
@@ -19,6 +26,18 @@ public class MenuBoard {
 	public Map<String, Control> menuMap() {
 		Map<String, Control> menu = new HashMap<>();
 		// 기능등록.
+		menu.put("/boardList.do", new BoardListControl());
+		// 단건조회.
+		menu.put("/getBoard.do", new BoardControl());
+		menu.put("/removeBoard.do", new RemoveControl());
+
+		// 등록(화면, 기능)
+		menu.put("/addBoardForm.do", new BoardFormControl());
+		menu.put("/addBoard.do", new AddBoardControl());
+
+		// 수정(화면, 기능)
+		menu.put("/modifyForm.do", new ModifyFormControl());
+		menu.put("/modifyBoard.do", new ModifyBoardControl());
 
 		return menu;
 	}

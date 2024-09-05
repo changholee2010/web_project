@@ -38,5 +38,16 @@
 	    from tbl_member
 	    where member_id = #{memberId}
 	</select>
+	
+	<select id="loginMember" resultType="com.yedam.vo.MemberVO">
+		select member_id   -- memberId
+	          ,member_name
+	          ,password
+	          ,email
+	          ,creation_date
+	    from tbl_member
+	    where member_id = #{id}
+	    and   password = #{pw}
+	</select>
 
 </mapper>
