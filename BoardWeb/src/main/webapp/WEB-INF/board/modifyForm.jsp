@@ -3,19 +3,19 @@
 <jsp:include page="../includes/header.jsp"></jsp:include>
 <h3>수정화면</h3>
 <form action="modifyBoard.do" method="post" enctype="multipart/form-data">
-  <input type="hidden" name="writer" value="${logid }">
+  <input type="hidden" name="writer" value="${board.writer }">
   <table class="table">
     <tr>
       <th>제목</th>
-      <td><input class="form-control" name="title" type="text" value=""></td>
+      <td><input class="form-control" name="title" type="text" value="${board.title }"></td>
     </tr>
     <tr>
       <th>내용</th>
-      <td><textarea class="form-control" name="content"></textarea></td>
+      <td><textarea class="form-control" name="content">${board.content }</textarea></td>
     </tr>
     <tr>
       <th>작성자</th>
-      <td>${logid }</td>
+      <td>${board.writer }</td>
     </tr>
     <tr>
       <th>이미지</th>

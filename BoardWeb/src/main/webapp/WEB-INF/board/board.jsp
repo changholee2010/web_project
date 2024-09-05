@@ -47,7 +47,7 @@
 </form>
 
 <a class="btn btn-secondary" onclick="form_submit('boardList.do')">목록으로</a>
-<a class="btn btn-warning ${board.writer ne logid ? 'disabled' : '' }" onclick="form_submit('removeForm.do')">수정</a>
+<a class="btn btn-warning ${board.writer ne logid ? 'disabled' : '' }" onclick="form_submit('modifyForm.do')">수정</a>
 <a class="btn btn-danger" onclick="form_submit('removeBoard.do')">삭제</a>
 <c:if test="${!empty message }">
   <span style="color: red;">${message }</span>
