@@ -23,7 +23,7 @@ import com.yedam.control.member.ModFormControl;
 import com.yedam.control.member.ModifyMemberControl;
 import com.yedam.control.member.RemoveMemberControl;
 
-@WebServlet("*.do")
+// @WebServlet("*.do")
 public class FrontController extends HttpServlet {
 
 	// url pattern - 실행되는 기능 -> map 컬렉션에 지정.
