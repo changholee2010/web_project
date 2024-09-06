@@ -38,7 +38,8 @@ public class ModifyFormControl implements Control {
 		// jsp페이지에 전달.
 		request.setAttribute("model", model);
 
-		request.getRequestDispatcher("WEB-INF/board/modifyForm.jsp").forward(request, response);
+		request.getRequestDispatcher("board/modifyForm.tiles")//
+				.forward(request, response);
 
 	}
 

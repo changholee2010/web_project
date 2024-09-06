@@ -14,10 +14,9 @@ public class LoginFormControl implements Control {
 	@Override
 	public void exec(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
-		
-		RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/html/logForm.jsp");
-		rd.forward(request, response);
+
+		request.getRequestDispatcher("main/logForm.tiles")//
+				.forward(request, response);
 	}
 
 }

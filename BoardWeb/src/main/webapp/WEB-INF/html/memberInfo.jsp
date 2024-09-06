@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<jsp:include page="../includes/header.jsp"></jsp:include>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <h3>회원상세정보</h3>
     <table class="table">
@@ -23,7 +23,9 @@
         	<td colspan="2" align="center">
         	    <button class="btn btn-info" disabled onclick="location.href='modifyForm.do?id=${memberInfo.memberId }'">수정</button>
         	    <button class="btn btn-danger" onclick="location.href='removeMember.do?id=${memberInfo.memberId }'">삭제</button>
+        	    <c:if test="${!empty message }">
+        	      <span><c:out value="${message }" /></span>
+        	    </c:if>
         	</td>
         </tr>
     </table>
-<jsp:include page="../includes/footer.jsp"></jsp:include>

@@ -22,7 +22,7 @@ public class MemberListControl implements Control {
 		List<MemberVO> list = svc.getMembers();
 
 		request.setAttribute("memberList", list);
-		request.getRequestDispatcher("WEB-INF/html/memberList.jsp")//
+		request.getRequestDispatcher("admin/memberList.tiles")//
 				.forward(request, response);
 	}
 

@@ -35,7 +35,7 @@ public class ModifyMemberControl implements Control {
 			response.sendRedirect("memberList.do");
 		} else {
 			request.setAttribute("message", "아이디 " + id + "의 수정할 정보가 없습니다.");
-			request.getRequestDispatcher("WEB-INF/html/modifyForm.jsp")//
+			request.getRequestDispatcher("admin/modifyForm.tiles")//
 					.forward(request, response);
 		}
 	}

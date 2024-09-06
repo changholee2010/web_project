@@ -38,7 +38,7 @@ public class RemoveControl implements Control {
 			request.setAttribute("board", board);
 			request.setAttribute("page", page);
 
-			request.getRequestDispatcher("WEB-INF/board/board.jsp")//
+			request.getRequestDispatcher("board/board.tiles")//
 					.forward(request, response);
 			return;
 		}

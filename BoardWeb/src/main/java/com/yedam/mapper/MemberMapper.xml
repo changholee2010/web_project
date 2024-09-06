@@ -35,6 +35,7 @@
 	          ,password
 	          ,email
 	          ,creation_date
+	          ,authority
 	    from tbl_member
 	    where member_id = #{memberId}
 	</select>
@@ -45,6 +46,7 @@
 	          ,password
 	          ,email
 	          ,creation_date
+	          ,authority
 	    from tbl_member
 	    where member_id = #{id}
 	    and   password = #{pw}

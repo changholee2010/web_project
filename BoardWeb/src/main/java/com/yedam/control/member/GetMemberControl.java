@@ -25,7 +25,8 @@ public class GetMemberControl implements Control {
 
 		request.setAttribute("memberInfo", mvo);
 
-		request.getRequestDispatcher("WEB-INF/html/memberInfo.jsp").forward(request, response);
+		request.getRequestDispatcher("admin/memberInfo.tiles")//
+				.forward(request, response);
 
 	}
 
