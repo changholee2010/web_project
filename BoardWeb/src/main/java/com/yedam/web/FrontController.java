@@ -6,7 +6,6 @@ import java.util.Map;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,13 +15,6 @@ import com.yedam.control.IntroControl;
 import com.yedam.control.JavaScriptControl;
 import com.yedam.control.MainControl;
 import com.yedam.control.SubControl;
-import com.yedam.control.board.AddFormControl;
-import com.yedam.control.member.AddMemberControl;
-import com.yedam.control.member.GetMemberControl;
-import com.yedam.control.member.MemberListControl;
-import com.yedam.control.member.ModFormControl;
-import com.yedam.control.member.ModifyMemberControl;
-import com.yedam.control.member.RemoveMemberControl;
 
 // @WebServlet("*.do")
 public class FrontController extends HttpServlet {
@@ -43,9 +35,11 @@ public class FrontController extends HttpServlet {
 
 		Map<String, Control> memberMenu = MenuMember.getInstance().menuMap(); // 박진석.
 		Map<String, Control> boardMenu = MenuBoard.getInstance().menuMap(); // 조민성.
+		Map<String, Control> replyMenu = MenuReply.getInstance().menuMap(); // 조민성.
 
 		map.putAll(memberMenu);// 멤버관련 메뉴추가.
 		map.putAll(boardMenu); // 게시글관련 메뉴추가.
+		map.putAll(replyMenu); // 댓글관련 메뉴추가.
 
 	}
 

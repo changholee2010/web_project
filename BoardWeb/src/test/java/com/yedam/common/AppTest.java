@@ -1,20 +1,19 @@
 package com.yedam.common;
 
-import com.yedam.service.BoardService;
-import com.yedam.service.BoardServiceImpl;
-import com.yedam.vo.BoardVO;
+import java.util.Map;
+
+import org.apache.ibatis.session.SqlSession;
+
+import com.yedam.mapper.ReplyMapper;
 
 public class AppTest {
 	public static void main(String[] args) {
-		SearchDTO search = new SearchDTO();
-		search.setSearchCondition("W");
-		search.setKeyword("user01");
-		search.setPage(2);
+		SqlSession sqlSession = DataSource.getInstance().openSession(true);
+		ReplyMapper mapper = sqlSession.getMapper(ReplyMapper.class);
 
-		// 목록.
-		BoardService svc = new BoardServiceImpl();
-		svc.boardList(search).forEach(System.out::println); // board ->
-		// System.out.println(board)
+		String[] arg = { "22", "24", "25", "26", "27" };
+
+		mapper.deleteReplys(arg);
 
 	}
 }
