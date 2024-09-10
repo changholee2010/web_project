@@ -24,27 +24,22 @@ function makeRow(reply = {}) {
 	// 체크박스 생성.
 	let btn = document.createElement('input'); //
 	btn.setAttribute('type', 'checkbox');
-
 	let td = document.createElement('td'); // <td><button>삭제</button></td>
 	td.appendChild(btn);
 	tr.appendChild(td); // <tr>td.....<td><button>삭제</button></td></tr>
-
 	// td생성.
 	fields.forEach(field => {
 		let td = document.createElement('td');
 		td.innerHTML = reply[field];
 		tr.appendChild(td);
 	})
-
 	// 삭제버튼.
 	btn = document.createElement('button'); // <button>삭제</button>
 	btn.innerHTML = '삭제';
 	btn.addEventListener('click', deleteRowFnc);
-
 	td = document.createElement('td'); // <td><button>삭제</button></td>
 	td.appendChild(btn);
 	tr.appendChild(td); // <tr>td.....<td><button>삭제</button></td></tr>
-
 	return tr;
 }
 
@@ -88,13 +83,11 @@ function delCheckedFnc1(e) {
 		let rno = item.parentElement.nextElementSibling.innerHTML;
 		params += rno + "&rno=";
 	})
-
 	const delHtp = new XMLHttpRequest();
 	delHtp.open('get', "removeReplys.do?" + params);
 	delHtp.send();
 	delHtp.onload = function() {
 		let result = JSON.parse(delHtp.responseText);
-
 		if (result.retCode == 'OK') {
 			alert('처리완료.')
 			// 화면상에 체크된 input 을 삭제.
@@ -105,15 +98,12 @@ function delCheckedFnc1(e) {
 			alert('처리중 예외');
 		}
 	}
-
 }
 
 // 선택삭제함수 반복실행.
 function delCheckedFnc(e) {
 	document.querySelectorAll('.list input[type="checkbox"]:checked').forEach(item => {
-
 		let rno = item.parentElement.nextElementSibling.innerHTML;
-
 		const delHtp = new XMLHttpRequest();
 		delHtp.open('get', 'removeReply.do?rno=' + rno); // 컨트롤 지정.
 		delHtp.send();
@@ -137,10 +127,13 @@ document.querySelector('#addReply').addEventListener('click', function() {
 	addHtp.open('get', 'addReply.do?bno=' + bno + '&reply=' + reply + '&replyer=' + replyer);
 	addHtp.send();
 	addHtp.onload = function() {
-		let result = JSON.parse(addHtp.responseText);
+		let result = JSON.parse(addHtp.responseText); // 컨트롤 반환해주는 정보.json문자열.
 		console.log(result); // retCode, retVal=>{}
-		let tr = makeRow(result.retVal);
-		document.querySelector('.list').appendChild(tr);
-
+		if (result.retCode == 'OK') {
+			let tr = makeRow(result.retVal);
+			document.querySelector('.list').appendChild(tr);
+		} else {
+			alert('처리중 예외.');
+		}
 	}
-})
+}) // end of 등록이벤트.

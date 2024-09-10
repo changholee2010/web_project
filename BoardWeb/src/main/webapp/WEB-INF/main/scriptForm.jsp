@@ -78,4 +78,5 @@
   <tbody class="list"></tbody>
 </table>
 
-<script src="js/reply.js"></script>
+<script src="js/replyService.js"></script>
+<script src="js/replyBoard.js"></script>

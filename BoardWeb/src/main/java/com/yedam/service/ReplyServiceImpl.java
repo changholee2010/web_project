@@ -30,7 +30,7 @@ public class ReplyServiceImpl implements ReplyService {
 
 	@Override
 	public boolean addReply(ReplyVO rvo) {
-		int rno = mapper.selectKey();
+		int rno = mapper.selectKey(); // replyNo, reply, replyer, boardNo
 		rvo.setReplyNo(rno);
 		return mapper.insertReply(rvo) == 1;
 	}

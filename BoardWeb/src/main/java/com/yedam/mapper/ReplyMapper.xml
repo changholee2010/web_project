@@ -28,12 +28,12 @@
       #{reply}
     </foreach>
   </delete>
-  
+
   <select id="selectKey" resultType="int">
     select reply_seq.nextval
     from dual
   </select>
-  
+
   <insert id="insertReply" parameterType="com.yedam.vo.ReplyVO">
     insert into tbl_reply (reply_no, replyer, reply, board_no)
     values (#{replyNo}, #{replyer}, #{reply}, #{boardNo})
