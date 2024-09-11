@@ -3,27 +3,29 @@
  * replyService에 정의된 메소드를 통해서 기능 실행.
  */
 
-/*------------------------------
-   이벤트(댓글등록)
-------------------------------*/
-document.querySelector('#addReply').addEventListener('click', addReplyFnc);
+let pagination;
 
+// DOM 요소를 다 읽어들인다음에 코드실행.
+document.addEventListener("DOMContentLoaded", function(e) {
+	/*------------------------------
+	   이벤트(댓글등록)
+	------------------------------*/
+	// 댓글등록.
+	document.querySelector('#addReply').addEventListener('click', addReplyFnc);
 
+	// 페이지링크 클릭.
+	document.querySelectorAll('ul.pagination a').forEach(aTag => {
+		aTag.addEventListener('click', showReplyListFnc);
+	})
 
-/******************
- * 댓글목록 그리기.
- *******************/
-svc.replyList(bno, // 원본글번호.
-	function(result) {
-		console.log(result);
-		result.forEach(reply => {
-			document.querySelector('div.content ul').appendChild(makeLi(reply));
-		});
-	}, // 성공처리 됐을 때 실행함수.
-	function(err) {
-		console.log(err);
-	} // 실패했을 때 실행함수.
-);
+	pagination = document.querySelector('ul.pagination');
+
+	//댓글과 페이지리스트 보여주기.
+	showReplyListAndPagingList();
+
+}) // end of DOMContentLoaded.
+
+let page = 1; // 페이지변경될때마다 사용해야함.
 
 /*------------------
   댓글정보 -> li 생성하는 함수.
@@ -75,7 +77,8 @@ function deleteLiFnc(e) {
 							icon: "success"
 						});
 						// 화면에서 삭제처리.
-						e.target.parentElement.parentElement.remove();
+						//e.target.parentElement.parentElement.remove();
+						showReplyListAndPagingList();
 					} else {
 						Swal.fire({
 							title: "Fail!",
@@ -102,6 +105,8 @@ function deleteLiFnc(e) {
 
 /*--------------------
    댓글등록 이벤트핸들러.
+   함수: addReplyFnc
+   기능: 입력값 등록. (ajax포함)
 --------------------*/
 function addReplyFnc(e) {
 	// bno, replyer, reply 값이 있는지 확인.
@@ -127,7 +132,10 @@ function addReplyFnc(e) {
 					text: "등록이 처리되었습니다!",
 					icon: "success"
 				});
-				document.querySelector('div.content ul').appendChild(makeLi(newReply));
+				// 댓글추가.
+				//document.querySelector('div.content ul').appendChild(makeLi(newReply));
+				page = 1;
+				showReplyListAndPagingList();
 			} else {
 				alert('등록처리 중 예외발생');
 			}
@@ -140,3 +148,123 @@ function addReplyFnc(e) {
 	);
 }
 
+/*--------------------
+   링크클릭시 댓글목록 새로출력.
+   함수: showReplyListFnc
+--------------------*/
+function showReplyListFnc(e) {
+
+	page = e.target.dataset.page; // 페이지번호.
+
+	// 함수호출로 대체함.
+	showReplyListAndPagingList();
+}
+
+/*---------------------
+   댓글갯수를 활용해서 페이지리스트 생성.
+   함수: showPagingListFnc
+---------------------*/
+function showPagingListFnc() {
+	svc.replyPagingCount(bno, // 글번호.
+		makePagingList, // 성공했을때 실행할 콜백함수. callback
+		function(err) {
+			console.log(err);
+		}
+	)
+};
+
+// 정상처리 실행할 콜백함수.
+function makePagingList(result) {
+	pagination.innerHTML = ''; // 기존 페이지 리스트 지우기.
+
+	let totalCnt = result.totalCount;
+	// 페이지목록 만들기.
+	let startPage, endPage, realEnd; // 첫페이지 ~ 마지막페이지
+	let prev, next; // 이전페이지, 이후페이지
+
+	endPage = Math.ceil(page / 5) * 5;
+	startPage = endPage - 4; // 6 ~ 10
+	realEnd = Math.ceil(totalCnt / 5);
+
+	endPage = endPage > realEnd ? realEnd : endPage;
+	prev = startPage > 1;
+	next = endPage < realEnd;
+
+	// ??
+
+	// 이전 페이지 생성.
+	let li = document.createElement('li');
+	li.className = 'page-item';
+	let aTag = document.createElement('a');
+	aTag.className = 'page-link';
+	aTag.innerHTML = 'Previous';
+	li.appendChild(aTag);
+	if (prev) {
+		aTag.setAttribute('href', '#');
+		aTag.setAttribute('data-page', startPage - 1);
+	} else {
+		li.classList.add('disabled');
+	}
+	pagination.appendChild(li);
+
+	// li 생성. 페이지 범위에 들어갈...
+	for (let p = startPage; p <= endPage; p++) {
+		let li = document.createElement('li');
+		li.className = 'page-item';
+		let aTag = document.createElement('a');
+		aTag.className = 'page-link';
+		aTag.setAttribute('href', '#');
+		aTag.setAttribute('data-page', p);
+		aTag.innerHTML = p;
+		li.appendChild(aTag); // <li class="page-item"><a class="page-link" href="#">1</a></li>
+		if (p == page) { // 현재페이지 스타일 변경.
+			li.classList.add('active');
+			li.setAttribute('aria-current', 'page')
+		}
+		pagination.appendChild(li);
+	}
+
+	// 이후 페이지 생성.
+	li = document.createElement('li');
+	li.className = 'page-item';
+	aTag = document.createElement('a');
+	aTag.className = 'page-link';
+	aTag.innerHTML = 'Next';
+	li.appendChild(aTag);
+	if (next) {
+		aTag.setAttribute('href', '#');
+		aTag.setAttribute('data-page', endPage + 1);
+	} else {
+		li.classList.add('disabled');
+	}
+	pagination.appendChild(li);
+
+	// 이벤트 등록..
+	document.querySelectorAll('ul.pagination a').forEach(aTag => {
+		aTag.addEventListener('click', showReplyListFnc);
+	})
+}
+
+/******************
+ * 댓글목록 출력. 함수로 변경. showReplyListAndPagingList
+ *******************/
+function showReplyListAndPagingList() {
+	svc.replyList({ bno, page }, // 원본글번호.
+		function(result) {
+			// 기존목록을 삭제하고 새로 그려주기.
+			document.querySelectorAll('div.content li').forEach((item, indx) => {
+				if (indx > 2) {
+					item.remove();
+				}
+			})
+			// 목록 출력.
+			result.forEach(reply => {
+				document.querySelector('div.content ul').appendChild(makeLi(reply));
+			});
+			showPagingListFnc();
+		}, // 성공처리 됐을 때 실행함수.
+		function(err) {
+			console.log(err);
+		} // 실패했을 때 실행함수.
+	);
+}

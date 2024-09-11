@@ -1,7 +1,5 @@
 package com.yedam.common;
 
-import java.util.Map;
-
 import org.apache.ibatis.session.SqlSession;
 
 import com.yedam.mapper.ReplyMapper;
@@ -11,9 +9,12 @@ public class AppTest {
 		SqlSession sqlSession = DataSource.getInstance().openSession(true);
 		ReplyMapper mapper = sqlSession.getMapper(ReplyMapper.class);
 
-		String[] arg = { "22", "24", "25", "26", "27" };
+		SearchDTO search = new SearchDTO();
+		search.setBoardNo(147);
+		search.setPage(2);
 
-		mapper.deleteReplys(arg);
+		mapper.selectListPaging(search)//
+				.forEach(reply -> System.out.println(reply.toString()));
 
 	}
 }

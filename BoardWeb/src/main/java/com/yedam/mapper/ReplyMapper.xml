@@ -16,6 +16,18 @@
     order by reply_no
   </select>
   
+  <!-- 댓글 페이징. -->
+  <select id="selectListPaging" parameterType="com.yedam.common.SearchDTO">
+	select b.*
+	from (select /*+ INDEX_DESC (r PK_REPLY) */ rownum rn, r.*
+	      from tbl_reply r
+	      where board_no = #{boardNo} ) b
+	<![CDATA[
+	where b.rn <= #{page} * 5
+	]]>
+	and   b.rn > (#{page} - 1) * 5
+  </select>
+  
   <delete id="deleteReply" parameterType="int">
     delete from tbl_reply
     where reply_no = #{rno}
@@ -38,5 +50,11 @@
     insert into tbl_reply (reply_no, replyer, reply, board_no)
     values (#{replyNo}, #{replyer}, #{reply}, #{boardNo})
   </insert>
+  
+  <select id="selectReplyCount" parameterType="int">
+    select count(1)
+    from tbl_reply
+    where board_no = #{bno}
+  </select>
 
 </mapper>

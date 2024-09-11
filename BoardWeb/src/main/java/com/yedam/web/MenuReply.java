@@ -8,7 +8,9 @@ import com.yedam.common.Control;
 import com.yedam.control.AddReplyControl;
 import com.yedam.control.RemoveReplyControl;
 import com.yedam.control.RemoveReplysControl;
+import com.yedam.control.ReplyCountControl;
 import com.yedam.control.ReplyListControl;
+import com.yedam.control.ReplyTableControl;
 import com.yedam.control.board.AddBoardControl;
 import com.yedam.control.board.BoardControl;
 import com.yedam.control.board.BoardFormControl;
@@ -37,6 +39,11 @@ public class MenuReply {
 		menu.put("/removeReplys.do", new RemoveReplysControl());
 		// 등록컨트롤.
 		menu.put("/addReply.do", new AddReplyControl());
+		// 댓글건수컨트롤.
+		menu.put("/replyCount.do", new ReplyCountControl());
+		
+		// 댓글작성 dataTable용.
+		menu.put("/replyTable.do", new ReplyTableControl());
 
 		return menu;
 	}

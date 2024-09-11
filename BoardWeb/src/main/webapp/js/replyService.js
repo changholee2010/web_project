@@ -60,8 +60,8 @@ function makeRow(reply = {}) {
 // 1.목록, 2.삭제, 3.추가 4.....
 const svc = {
 	/** 댓글목록 메소드 */
-	replyList: function(bno = 1, successCallback, errorCallback) {
-		fetch('replyList.do?bno=' + bno)
+	replyList: function(param = { bno: 1, page: 1 }, successCallback, errorCallback) {
+		fetch('replyList.do?bno=' + param.bno + '&page=' + param.page)
 			.then(resolve => resolve.json())
 			.then(successCallback)
 			.catch(errorCallback)
@@ -87,4 +87,10 @@ const svc = {
 			.catch(errorCallback)
 	},
 	/** 댓글건수를 가져와서 페이징정보를 생성. replyPagingCount */
-}
+	replyPagingCount(bno = 1, successCallback, errorCallback) {
+		fetch('replyCount.do?bno=' + bno)
+			.then(resolve => resolve.json())
+			.then(successCallback)
+			.catch(errorCallback)
+	}
+} // end of svc.
