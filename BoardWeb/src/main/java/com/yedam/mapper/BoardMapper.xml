@@ -13,7 +13,7 @@
 	          ,view_cnt
 	          ,creation_date
 	    from tbl_board
-	    order by board_no desc
+	    --order by board_no desc
 	</select>
 	
 	<select id="selectListPaging" resultType="board" parameterType="com.yedam.common.SearchDTO">

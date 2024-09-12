@@ -7,6 +7,29 @@
 <script src="//cdn.datatables.net/2.1.5/js/dataTables.min.js"></script>
 
 <h3>게시글 목록</h3>
+<div class="center">
+  <form action="boardList.do">
+    <div class="row">
+      <!-- 검색조건(title, writer 검색) -->
+      <div class="col-sm-4">
+        <select name="searchCondition" class="form-control">
+          <option value="">선택하세요</option>
+          <option value="T" ${model.searchCondition eq 'T' ? 'selected' : '' }>제목</option>
+          <option value="W" ${model.searchCondition eq 'W' ? 'selected' : '' }>작성자</option>
+          <option value="TW" ${model.searchCondition eq 'TW' ? 'selected' : '' }>제목 & 작성자</option>
+        </select>
+      </div>
+      <!-- 키워드 -->
+      <div class="col-sm-5">
+        <input type="text" name="keyword" value="${model.keyword }" class="form-control">
+      </div>
+      <!-- 조회버튼 -->
+      <div class="col-sm-2">
+        <input type="submit" value="조회" class="btn btn-primary">
+      </div>
+    </div> <!-- end of div.row -->
+  </form>
+</div> <!-- end of div.center -->
 
 <c:choose>
   <c:when test="${!empty message }">

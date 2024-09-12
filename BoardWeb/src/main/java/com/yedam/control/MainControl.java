@@ -12,8 +12,8 @@ public class MainControl implements Control {
 
 	@Override
 	public void exec(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("메인컨트롤 실행.");
-		request.getRequestDispatcher("main/main.tiles")//
+
+		request.getRequestDispatcher("WEB-INF/main/calendar.jsp")//
 				.forward(request, response);
 	}
 

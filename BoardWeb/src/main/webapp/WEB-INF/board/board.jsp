@@ -27,9 +27,11 @@
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+<!-- ---------------- -->
+<!-- 글상세 정보 시작. -->
+<!-- ---------------- -->
 
 <h3>글 상세 페이지.</h3>
-<p>${model }</p>
 <table class="table">
   <tr>
     <th>글번호</th>
@@ -76,16 +78,24 @@
 <c:if test="${!empty message }">
   <span style="color: red;">${message }</span>
 </c:if>
+<!-- ---------------- -->
+<!-- 글상세 정보 종료. -->
+<!-- ---------------- -->
 
-<!-- 댓글관련. -->
+
+<!-- ---------------- -->
+<!-- 댓글관련 시작 -->
+<!-- ---------------- -->
 <div class="container reply">
   <!-- 댓글등록 -->
   <div class="header">
     <input type="text" id="reply" class="col-sm-9">
     <button id="addReply" class="btn btn-primary">댓글등록</button>
+    <button id="delReply" class="btn btn-danger">댓글삭제</button>
   </div>
 
-  <!-- 댓글목록 -->
+  <!-- 댓글목록 데이터테이블 활용 -->
+  <!-- 댓글페이징 데이터테이블 활용 -->
   <table id="example" class="display" style="width:100%">
     <thead>
       <tr>
@@ -104,8 +114,10 @@
       </tr>
     </tfoot>
   </table>
-  <!-- 댓글페이징 -->
 </div>
+<!-- ---------------- -->
+<!-- 댓글관련 종료 -->
+<!-- ---------------- -->
 
 <script>
   // 매개값으로 이동할 컨트롤을 받아서 파라미터를 전달.

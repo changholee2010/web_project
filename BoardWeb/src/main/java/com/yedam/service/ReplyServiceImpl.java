@@ -1,6 +1,7 @@
 package com.yedam.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
@@ -40,5 +41,25 @@ public class ReplyServiceImpl implements ReplyService {
 	@Override
 	public int getReplyCount(int bno) {
 		return mapper.selectReplyCount(bno);
+	}
+
+	@Override
+	public List<Map<String, Object>> eventList() {
+		return mapper.selectEvent();
+	}
+
+	@Override
+	public boolean addEvent(SearchDTO event) {
+		return mapper.insertEvent(event) == 1;
+	}
+
+	@Override
+	public boolean removeEvent(SearchDTO event) {
+		return mapper.deleteEvent(event) == 1;
+	}
+
+	@Override
+	public List<Map<String, Object>> todoList() {
+		return mapper.todoList();
 	}
 }

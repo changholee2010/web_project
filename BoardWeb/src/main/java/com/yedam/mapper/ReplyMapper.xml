@@ -56,5 +56,32 @@
     from tbl_reply
     where board_no = #{bno}
   </select>
+  
+  <select id="selectEvent" useCache="false" resultType="map">
+    select title as "title"
+          ,start_date as "start"
+          ,end_date as "end"
+    from tbl_calendar
+  </select>
+  
+  <insert id="insertEvent" parameterType="com.yedam.common.SearchDTO">
+    insert into tbl_calendar values(#{title}, #{start}, #{end})
+  </insert>
+  
+  <delete id="deleteEvent" parameterType="com.yedam.common.SearchDTO">
+    delete from tbl_calendar
+    where title = #{title}
+    and   start_date = #{start}
+    and   end_date = #{end}
+  </delete>
+  
+  <select id="todoList" resultType="map">
+    select todo_id as "no"
+          ,todo_date as "doDate"
+          ,todo_title as "title"
+          ,creation_date as "creationDate"
+    from tbl_todo
+    where todo_date = to_char(sysdate, 'yyyy-mm-dd')
+  </select>
 
 </mapper>
