@@ -22,5 +22,9 @@ public interface ReplyService {
 
 	// todo관련.
 	List<Map<String, Object>> todoList();
+	
+	// chart 관련.
+	List<Map<String, Object>> countPerWriter();
+	
 
 }

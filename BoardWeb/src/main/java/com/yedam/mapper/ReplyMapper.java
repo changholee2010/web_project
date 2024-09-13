@@ -29,4 +29,7 @@ public interface ReplyMapper {
 
 	// 오늘의 할일 관련.
 	List<Map<String, Object>> todoList();
+	
+	// 글작성건수와 작성자 차트.
+	List<Map<String, Object>> countPerWriter();
 }
