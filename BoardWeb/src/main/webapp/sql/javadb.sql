@@ -1,18 +1,18 @@
--- fullcalendar µ¥ÀÌÅÍ.
+-- fullcalendar ë°ì´í„°.
 create table tbl_calendar (
   title varchar2(1000) not null
  ,start_date varchar2(20) not null
  ,end_date varchar2(20)
 );
 
-insert into tbl_calendar values('È¸ÀÇ1', '202409-12T16:00:00', '202409-12T18:00:00');
-insert into tbl_calendar values('Ãß¼®¿¬ÈŞ', '2024-09-16', '2024-09-19');
+insert into tbl_calendar values('íšŒì˜1', '2024-09-12T16:00:00', '2024-09-12T18:00:00');
+insert into tbl_calendar values('ì¶”ì„ì—°íœ´', '2024-09-16', '2024-09-19');
 
 select *
 from tbl_calendar;
 
 delete from tbl_calendar
-where title like 'È¸ÀÇ1';
+where title like 'íšŒì˜1';
 
 create table tbl_todo (
   todo_id number primary key,
@@ -23,18 +23,18 @@ create table tbl_todo (
 create sequence todo_seq;
 
 insert into tbl_todo (todo_id, todo_date, todo_title)
-values(todo_seq.nextval, '2024-09-13', '±¸±Û Â÷Æ®');
+values(todo_seq.nextval, '2024-09-13', 'êµ¬ê¸€ ì°¨íŠ¸');
 insert into tbl_todo (todo_id, todo_date, todo_title)
-values(todo_seq.nextval, '2024-09-13', 'Àå¹Ù±¸´Ï ±¸Çö');
+values(todo_seq.nextval, '2024-09-13', 'ì¥ë°”êµ¬ë‹ˆ êµ¬í˜„');
 insert into tbl_todo (todo_id, todo_date, todo_title)
-values(todo_seq.nextval, '2024-09-13', 'ÀÚ¹Ù Å¬·¡½º ÀÎÅÍÆäÀÌ½º');
+values(todo_seq.nextval, '2024-09-13', 'ìë°” í´ë˜ìŠ¤ ì¸í„°í˜ì´ìŠ¤');
 
 insert into tbl_todo (todo_id, todo_date, todo_title)
-values(todo_seq.nextval, '2024-09-12', 'ÀÚ¹Ù Å¬·¡½º2');
+values(todo_seq.nextval, '2024-09-12', 'ìë°” í´ë˜ìŠ¤2');
 insert into tbl_todo (todo_id, todo_date, todo_title)
-values(todo_seq.nextval, '2024-09-12', 'ÀÚ¹Ù Å¬·¡½º »ó¼Ó2');
+values(todo_seq.nextval, '2024-09-12', 'ìë°” í´ë˜ìŠ¤ ìƒì†2');
 insert into tbl_todo (todo_id, todo_date, todo_title)
-values(todo_seq.nextval, '2024-09-12', 'ÀÚ¹Ù Å¬·¡½º ÀÎÅÍÆäÀÌ½º2');
+values(todo_seq.nextval, '2024-09-12', 'ìë°” í´ë˜ìŠ¤ ì¸í„°í˜ì´ìŠ¤2');
 
 
 select *
@@ -57,25 +57,25 @@ and   b.rn > (:page - 1) * 5;
 
 
 
--- ´ñ±Û.
+-- ëŒ“ê¸€.
 create table tbl_reply (
-  reply_no number  -- ´ñ±Û¹øÈ£
- ,replyer  varchar2(30) not null -- ´ñ±ÛÀÛ¼ºÀÚ
- ,reply    varchar2(1000) not null -- ´ñ±Û³»¿ë
- ,board_no number not null -- ¿øº»±Û ¹øÈ£
+  reply_no number  -- ëŒ“ê¸€ë²ˆí˜¸
+ ,replyer  varchar2(30) not null -- ëŒ“ê¸€ì‘ì„±ì
+ ,reply    varchar2(1000) not null -- ëŒ“ê¸€ë‚´ìš©
+ ,board_no number not null -- ì›ë³¸ê¸€ ë²ˆí˜¸
  ,reply_date date default sysdate
 );
 alter table tbl_reply add constraint pk_reply primary key (reply_no);
 create sequence reply_seq;
 
 insert into tbl_reply (reply_no, replyer, reply, board_no)
-values (reply_seq.nextval, 'user01', '¿À´ÃÀº ¼ö¿äÀÏÀÌ³×¿ä1', 148);
+values (reply_seq.nextval, 'user01', 'ì˜¤ëŠ˜ì€ ìˆ˜ìš”ì¼ì´ë„¤ìš”1', 148);
 insert into tbl_reply (reply_no, replyer, reply, board_no)
-values (reply_seq.nextval, 'user02', '¿À´ÃÀº ¼ö¿äÀÏÀÌ³×¿ä2', 148);
+values (reply_seq.nextval, 'user02', 'ì˜¤ëŠ˜ì€ ìˆ˜ìš”ì¼ì´ë„¤ìš”2', 148);
 insert into tbl_reply (reply_no, replyer, reply, board_no)
-values (reply_seq.nextval, 'user03', '¿À´ÃÀº ¼ö¿äÀÏÀÌ³×¿ä3', 148);
+values (reply_seq.nextval, 'user03', 'ì˜¤ëŠ˜ì€ ìˆ˜ìš”ì¼ì´ë„¤ìš”3', 148);
 insert into tbl_reply (reply_no, replyer, reply, board_no)
-values (reply_seq.nextval, 'user02', '¿À´ÃÀº ¼ö¿äÀÏÀÌ³×¿ä4', 148);
+values (reply_seq.nextval, 'user02', 'ì˜¤ëŠ˜ì€ ìˆ˜ìš”ì¼ì´ë„¤ìš”4', 148);
 
 insert into tbl_reply (reply_no, replyer, reply, board_no)
 select reply_seq.nextval, replyer, reply, board_no
@@ -101,14 +101,14 @@ from tbl_board
 order by 1 desc;
 
 
--- °Ô½ÃÆÇ
+-- ê²Œì‹œíŒ
 create table tbl_board (
-  board_no number -- °Ô½Ã±Û ¹øÈ£/ Å°
- ,title    varchar2(100) not null -- ±ÛÁ¦¸ñ.
- ,content  varchar2(1000) not null -- ±Û³»¿ë.
- ,writer   varchar2(50) not null -- ÀÛ¼ºÀÚ.
- ,view_cnt number default 0 -- Á¶È¸¼ö.
- ,creation_date  date default sysdate -- °Ô½Ã±Û »ı¼ºÀÏÀÚ.
+  board_no number -- ê²Œì‹œê¸€ ë²ˆí˜¸/ í‚¤
+ ,title    varchar2(100) not null -- ê¸€ì œëª©.
+ ,content  varchar2(1000) not null -- ê¸€ë‚´ìš©.
+ ,writer   varchar2(50) not null -- ì‘ì„±ì.
+ ,view_cnt number default 0 -- ì¡°íšŒìˆ˜.
+ ,creation_date  date default sysdate -- ê²Œì‹œê¸€ ìƒì„±ì¼ì.
 );
 alter table tbl_board add constraint pk_board primary key (board_no);
 alter table tbl_board add image varchar2(100);
@@ -122,20 +122,20 @@ delete from tbl_board
 where board_no > 150;
 
 insert into tbl_board (board_no, title, content, writer)
-values(board_seq.nextval, '°Ô½Ã±Û Å×½ºÆ®', '°Ô½Ã±Û Å×½ºÆ®ÀÔ´Ï´Ù', 'user01');
+values(board_seq.nextval, 'ê²Œì‹œê¸€ í…ŒìŠ¤íŠ¸', 'ê²Œì‹œê¸€ í…ŒìŠ¤íŠ¸ì…ë‹ˆë‹¤', 'user01');
 insert into tbl_board (board_no, title, content, writer)
-values(board_seq.nextval, '°Ô½Ã±Û Java Å×½ºÆ®', '°Ô½Ã±Û Java Å×½ºÆ®ÀÔ´Ï´Ù', 'user02');
+values(board_seq.nextval, 'ê²Œì‹œê¸€ Java í…ŒìŠ¤íŠ¸', 'ê²Œì‹œê¸€ Java í…ŒìŠ¤íŠ¸ì…ë‹ˆë‹¤', 'user02');
 insert into tbl_board (board_no, title, content, writer)
-values(board_seq.nextval, '°Ô½Ã±Û HTML Å×½ºÆ®', '°Ô½Ã±Û HTML Å×½ºÆ®ÀÔ´Ï´Ù', 'user03');
+values(board_seq.nextval, 'ê²Œì‹œê¸€ HTML í…ŒìŠ¤íŠ¸', 'ê²Œì‹œê¸€ HTML í…ŒìŠ¤íŠ¸ì…ë‹ˆë‹¤', 'user03');
 
 insert into tbl_board (board_no, title, content, writer)
-values(board_seq.nextval, '°Ô½Ã±Û µµ¼­ Å×½ºÆ®', '°Ô½Ã±Û µµ¼­ Å×½ºÆ®ÀÔ´Ï´Ù', 'chacha');
+values(board_seq.nextval, 'ê²Œì‹œê¸€ ë„ì„œ í…ŒìŠ¤íŠ¸', 'ê²Œì‹œê¸€ ë„ì„œ í…ŒìŠ¤íŠ¸ì…ë‹ˆë‹¤', 'chacha');
 
 insert into tbl_board(board_no, title, content, writer)
 select board_seq.nextval, title, content, writer
 from tbl_board;
 
--- 1page -> 5°Ç¾¿ Ãâ·Â.
+-- 1page -> 5ê±´ì”© ì¶œë ¥.
 select c.*
 from (select rownum rn, b.*
       from (select *
@@ -147,45 +147,45 @@ where c.rn > (:page - 1) * 5;
 select /*+ INDEX_DESC (b PK_BOARD) */ b.*
 from tbl_board b;
 
--- È¸¿øÅ×ÀÌºí.
+-- íšŒì›í…Œì´ë¸”.
 create table tbl_member (
   member_id   varchar2(10) primary key
  ,member_name varchar2(100) not null
  ,password    varchar2(10) not null
  ,email       varchar2(50)
- ,authority   varchar2(10) default 'User' -- ÀÏ¹İ»ç¿ëÀÚ: User, °ü¸®ÀÚ: Admin
+ ,authority   varchar2(10) default 'User' -- ì¼ë°˜ì‚¬ìš©ì: User, ê´€ë¦¬ì: Admin
  ,creation_date date default sysdate
 );
 insert into tbl_member (member_id, member_name, password)
-values('user01', '±è±æµ¿', '1111');
+values('user01', 'ê¹€ê¸¸ë™', '1111');
 insert into tbl_member (member_id, member_name, password)
-values('user02', 'À¯¿µ¼®', '1111');
+values('user02', 'ìœ ì˜ì„', '1111');
 insert into tbl_member (member_id, member_name, password)
-values('user03', 'ÃÖ¹Î¼®', '1111');
+values('user03', 'ìµœë¯¼ì„', '1111');
 insert into tbl_member (member_id, member_name, password)
-values('chacha', 'Â÷Â÷Â÷', '1111');
+values('chacha', 'ì°¨ì°¨ì°¨', '1111');
 
 select *
 from tbl_member;
 
 insert into tbl_member (member_id, member_name, password, authority)
-values('guest', '°ü¸®ÀÚ', 'guest', 'Admin');
+values('guest', 'ê´€ë¦¬ì', 'guest', 'Admin');
 
 delete from tbl_member
 where member_id = 'guest787';
 
 drop table tbl_product purge;
 create table tbl_product (
- prod_code varchar2(10) primary key -- »óÇ°ÄÚµå(P001, P002)
-,prod_name varchar2(100) not null -- »óÇ°¸í
-,prod_desc varchar2(1000) not null -- »óÇ°¼³¸í
-,selling_price number -- »óÇ°°¡°İ
-,creation_date date default sysdate -- µ¥ÀÌÅÍ »ı¼ºÀÏ½Ã
+ prod_code varchar2(10) primary key -- ìƒí’ˆì½”ë“œ(P001, P002)
+,prod_name varchar2(100) not null -- ìƒí’ˆëª…
+,prod_desc varchar2(1000) not null -- ìƒí’ˆì„¤ëª…
+,selling_price number -- ìƒí’ˆê°€ê²©
+,creation_date date default sysdate -- ë°ì´í„° ìƒì„±ì¼ì‹œ
 );
 
-insert into tbl_product values('P001', '¸ğ³ª¹Ì º¼Ææ 1.0', '¾ÆÁÖ ÁÁÀº ¸ğ³ª¹Ì º¼Ææ 1.0 ÀÔ´Ï´Ù', 1000, sysdate);
-insert into tbl_product values('P002', '¸ğ³ª¹Ì »şÇÁ 1.0', '¾ÆÁÖ ÁÁÀº ¸ğ³ª¹Ì »şÇÁ 1.0 ÀÔ´Ï´Ù', 2000, sysdate);
-insert into tbl_product values('P003', '¸ğ³ª¹Ì Áö¿ì°³ 1.0', '¾ÆÁÖ ÁÁÀº ¸ğ³ª¹Ì Áö¿ì°³ 1.0 ÀÔ´Ï´Ù', 500, sysdate);
+insert into tbl_product values('P001', 'ëª¨ë‚˜ë¯¸ ë³¼íœ 1.0', 'ì•„ì£¼ ì¢‹ì€ ëª¨ë‚˜ë¯¸ ë³¼íœ 1.0 ì…ë‹ˆë‹¤', 1000, sysdate);
+insert into tbl_product values('P002', 'ëª¨ë‚˜ë¯¸ ìƒ¤í”„ 1.0', 'ì•„ì£¼ ì¢‹ì€ ëª¨ë‚˜ë¯¸ ìƒ¤í”„ 1.0 ì…ë‹ˆë‹¤', 2000, sysdate);
+insert into tbl_product values('P003', 'ëª¨ë‚˜ë¯¸ ì§€ìš°ê°œ 1.0', 'ì•„ì£¼ ì¢‹ì€ ëª¨ë‚˜ë¯¸ ì§€ìš°ê°œ 1.0 ì…ë‹ˆë‹¤', 500, sysdate);
 
 select *
 from tbl_product;
