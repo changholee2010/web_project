@@ -13,7 +13,7 @@ public class AppTest {
 	public static void main(String[] args) {
 		SqlSession sqlSession = DataSource.getInstance().openSession(true);
 		ReplyMapper mapper = sqlSession.getMapper(ReplyMapper.class);
-		List<Map<String, Object>> list = mapper.selectEvent();
+		List<Map<String, Object>> list = mapper.countPerWriter();
 
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
 		String json = gson.toJson(list);

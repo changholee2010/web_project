@@ -17,13 +17,13 @@ import com.yedam.service.ReplyService;
 import com.yedam.service.ReplyServiceImpl;
 
 /*
- *   "/eventList.do" ->
- *   "/addEvent.do"  ->
- *   "/removeEvent.do" -> 
+ *   "/eventList.do" -> eventList 메소드.
+ *   "/addEvent.do"  -> addEvent 메소드.
+ *   "/removeEvent.do" -> removeEvent 메소드.
  */
 public class EventControl implements Control {
 
-	ReplyService svc = new ReplyServiceImpl(); // 
+	ReplyService svc = new ReplyServiceImpl(); //
 
 	@Override
 	public void exec(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -37,8 +37,8 @@ public class EventControl implements Control {
 		String methodName = page.substring(1, page.indexOf("."));
 
 		try {
-			Class<?> cls = Class.forName(this.getClass().getName());
-			Method method = cls.getDeclaredMethod(methodName // 메소드명
+//			Class<?> cls = Class.forName(this.getClass().getName());
+			Method method = this.getClass().getDeclaredMethod(methodName // 메소드명
 					, HttpServletRequest.class // 파라미터1
 					, HttpServletResponse.class // 파라미터2
 			);
@@ -103,6 +103,29 @@ public class EventControl implements Control {
 				response.getWriter().print("{\"retCode\": \"NG\"}");
 			}
 		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	// chart 의 json 데이터 .
+	public void chart(HttpServletRequest request, HttpServletResponse response) {
+
+		List<Map<String, Object>> list = svc.countPerWriter();
+		Gson gson = new GsonBuilder().setPrettyPrinting().create();
+		String json = gson.toJson(list); // list객체를 -> json문자열로 생성.
+
+		try {
+			response.getWriter().println(json);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	// chart의 페이지 호출.
+	public void showChart(HttpServletRequest request, HttpServletResponse response) {
+		try {
+			request.getRequestDispatcher("admin/chart.tiles").forward(request, response);
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}

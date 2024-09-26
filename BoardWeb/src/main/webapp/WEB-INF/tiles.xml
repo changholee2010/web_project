@@ -4,40 +4,40 @@
        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 
 <tiles-definitions>
-  <definition name="myapp.homepage" template="/layouts/classic.jsp">
-    <put-attribute name="title" value="Tiles tutorial homepage" />
-    <put-attribute name="header" value="/tiles/banner.jsp" />
-    <put-attribute name="menu" value="/tiles/common_menu.jsp" />
-    <put-attribute name="body" value="/tiles/home_body.jsp" />
-    <put-attribute name="footer" value="/tiles/credits.jsp" />
-  </definition>
+	<definition name="myapp.homepage" template="/layouts/classic.jsp">
+		<put-attribute name="title" value="Tiles tutorial homepage" />
+		<put-attribute name="header" value="/tiles/banner.jsp" />
+		<put-attribute name="menu" value="/tiles/common_menu.jsp" />
+		<put-attribute name="body" value="/tiles/home_body.jsp" />
+		<put-attribute name="footer" value="/tiles/credits.jsp" />
+	</definition>
 
-  <definition name="myapp.common" template="/WEB-INF/layout/template.jsp">
-    <put-attribute name="title" value="일반사용자 homepage" />
-    <put-attribute name="header" value="/WEB-INF/layout/header.jsp" />
-    <put-attribute name="menu" value="/WEB-INF/layout/menu.jsp" />
-    <put-attribute name="body" value="/WEB-INF/layout/body.jsp" />
-    <put-attribute name="footer" value="/WEB-INF/layout/footer.jsp" />
-  </definition>
-  
-  <definition name="myapp.admin" template="/WEB-INF/layoutAdmin/template.jsp">
-    <put-attribute name="title" value="관리자용 homepage" />
-    <put-attribute name="header" value="/WEB-INF/layoutAdmin/header.jsp" />
-    <put-attribute name="menu" value="/WEB-INF/layoutAdmin/menu.jsp" />
-    <put-attribute name="body" value="/WEB-INF/layoutAdmin/body.jsp" />
-    <put-attribute name="footer" value="/WEB-INF/layoutAdmin/footer.jsp" />
-  </definition>
+	<definition name="myapp.common" template="/WEB-INF/layout/template.jsp">
+		<put-attribute name="title" value="일반사용자 homepage" />
+		<put-attribute name="header" value="/WEB-INF/layout/header.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/layout/menu.jsp" />
+		<put-attribute name="body" value="/WEB-INF/layout/body.jsp" />
+		<put-attribute name="footer" value="/WEB-INF/layout/footer.jsp" />
+	</definition>
 
-  <definition name="WILDCARD:admin/*" extends="myapp.admin">
-    <put-attribute name="body" value="/WEB-INF/html/{1}.jsp" />
-  </definition>
-  
-  <definition name="WILDCARD:html/*" extends="myapp.common">
-    <put-attribute name="body" value="/WEB-INF/html/loc.jsp" />
-  </definition>
+	<definition name="myapp.admin" template="/WEB-INF/layoutAdmin/template.jsp">
+		<put-attribute name="title" value="관리자용 homepage" />
+		<put-attribute name="header" value="/WEB-INF/layoutAdmin/header.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/layoutAdmin/menu.jsp" />
+		<put-attribute name="body" value="/WEB-INF/layoutAdmin/body.jsp" />
+		<put-attribute name="footer" value="/WEB-INF/layoutAdmin/footer.jsp" />
+	</definition>
 
-  <definition name="WILDCARD:*/*" extends="myapp.common">
-    <put-attribute name="body" value="/WEB-INF/{1}/{2}.jsp" />
-  </definition>
+	<definition name="WILDCARD:check/*" extends="myapp.common">
+		<put-attribute name="body" value="/WEB-INF/view/main/{1}.html" />
+	</definition>
+
+	<definition name="WILDCARD:admin/*" extends="myapp.admin">
+		<put-attribute name="body" value="/WEB-INF/view/html/{1}.jsp" />
+	</definition>
+
+	<definition name="WILDCARD:*/*" extends="myapp.common">
+		<put-attribute name="body" value="/WEB-INF/view/{1}/{2}.jsp" />
+	</definition>
 
 </tiles-definitions>

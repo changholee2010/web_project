@@ -62,4 +62,9 @@ public class ReplyServiceImpl implements ReplyService {
 	public List<Map<String, Object>> todoList() {
 		return mapper.todoList();
 	}
+
+	@Override
+	public List<Map<String, Object>> countPerWriter() {
+		return mapper.countPerWriter();
+	}
 }
