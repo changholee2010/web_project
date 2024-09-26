@@ -1,0 +1,101 @@
+<h3>로그인화면</h3>
+<!-- 로그인 실패일 경우. -->
+
+<form action="login.do" method="post" name="loginForm">
+  <table class="table">
+    <tr>
+      <th>아이디</th>
+      <td><input type="text" name="id"></td>
+    </tr>
+    <tr>
+      <th>비밀번호</th>
+      <td><input type="password" name="pw"></td>
+    </tr>
+    <tr>
+      <td colspan="2">
+        <input type="checkbox" name="autoLogin">자동 로그인
+        <input type="checkbox" name="saveId">아이디 저장
+        <input type="checkbox" name="savePass">비밀번호 저장
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2"><button class="btn btn-primary" type="button" onclick="login()">로그인</button></td>
+    </tr>
+  </table>
+</form>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function (e) {
+    // 자동로그인, 아이디저장, 비밀번호저장을 구분해서 체크여부 실행.
+    if (getCookie('autoLogin')) {
+      document.querySelector('input[name="autoLogin"]').checked = true;
+      // 아이디와 비밀번호를 지정.
+      document.querySelector('input[name="id"]').value = getCookie('id');
+      document.querySelector('input[name="pw"]').value = getCookie('password');
+
+    } else {
+
+      if (getCookie('id')) {
+        document.querySelector('input[name="saveId"]').checked = true;
+        document.querySelector('input[name="id"]').value = getCookie('id');
+      }
+      if (getCookie('password')) {
+        document.querySelector('input[name="savePass"]').checked = true;
+        document.querySelector('input[name="pw"]').value = getCookie('password');
+      }
+
+    }
+  })
+
+  //쿠키 저장 함수
+  function setCookie(name, value, expiredays) {
+    var todayDate = new Date();
+    todayDate.setDate(todayDate.getDate() + expiredays);
+    document.cookie = name + "=" + escape(value) + "; path=/; expires=" + todayDate.toGMTString() + ";"
+  }
+  //쿠키 불러오기 함수
+  function getCookie(name) {
+    var search = name + "=";
+    if (document.cookie.length > 0) { // 어떤 쿠키라도 있다면
+      offset = document.cookie.indexOf(search);
+      if (offset != -1) { // 쿠키 존재 시 
+        offset += search.length; // 첫번째 값의 인덱스 셋팅 
+        end = document.cookie.indexOf(";", offset); // 마지막 쿠키 값의 인덱스 셋팅
+        if (end == -1)
+          end = document.cookie.length;
+        return unescape(document.cookie.substring(offset, end));
+      }
+    }
+  }
+
+  function login() {
+    console.log('login')
+    if (document.loginForm.autoLogin.checked === true) { //자동로그인 체크시
+      //"autoLogin"이라는 키 값에 "Y" 값 셋팅
+      setCookie("autoLogin", "Y", 30);
+      //"id"라는 키 값에 form에 입력한 아이디 값 셋팅
+      setCookie("id", document.loginForm.id.value, 30);
+      //"password"라는 키 값에 form에 입력한 비밀번호 값 셋팅
+      setCookie("password", document.loginForm.pw.value, 30);
+    } else { //자동로그인 체크 해제시
+      //쿠키 값 제거
+      setCookie("autoLogin", "Y", 0);
+      //아이디 저장 클릭 시 
+      if (document.loginForm.saveId.checked === true) { // 아이디 저장을 체크 하였을때
+        setCookie("id", document.loginForm.id.value, 30);
+      } else { // 아이디 저장을 체크 하지 않았을때
+        setCookie("id", document.loginForm.id.value, 0); //날짜를 0으로 저장하여 쿠키삭제
+      }
+      //비밀번호 저장 클릭 시
+      if (document.loginForm.savePass.checked === true) {
+        setCookie("password", document.loginForm.pw.value, 30);
+      } else {
+        setCookie("password", document.loginForm.pw.value, 0);
+      }
+    }
+    //로그인 실행
+    document.loginForm.method = "post";
+    document.loginForm.action = "login.do";
+    document.loginForm.submit();
+  }
+</script>
