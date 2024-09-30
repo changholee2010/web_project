@@ -13,7 +13,7 @@ public class MainControl implements Control {
 	@Override
 	public void exec(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		request.getRequestDispatcher("WEB-INF/main/calendar.jsp")//
+		request.getRequestDispatcher("WEB-INF/view/main/calendar.jsp")//
 				.forward(request, response);
 	}
 
