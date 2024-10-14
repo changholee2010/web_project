@@ -13,13 +13,13 @@ import com.yedam.control.board.ModifyBoardControl;
 import com.yedam.control.board.ModifyFormControl;
 import com.yedam.control.board.RemoveControl;
 
-public class MenuBoard {
-	private static MenuBoard instance = new MenuBoard();
+public class BoardMenu {
+	private static BoardMenu instance = new BoardMenu();
 
-	private MenuBoard() {
+	private BoardMenu() {
 	}
 
-	public static MenuBoard getInstance() {
+	public static BoardMenu getInstance() {
 		return instance;
 	}
 

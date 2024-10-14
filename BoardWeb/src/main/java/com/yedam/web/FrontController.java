@@ -20,6 +20,8 @@ import com.yedam.control.SubControl;
 // @WebServlet("*.do")
 public class FrontController extends HttpServlet {
 
+	private static final long serialVersionUID = 1L;
+
 	// url pattern - 실행되는 기능 -> map 컬렉션에 지정.
 	Map<String, Control> map;
 
@@ -41,9 +43,9 @@ public class FrontController extends HttpServlet {
 		map.put("/chart.do", new EventControl());
 		map.put("/showChart.do", new EventControl());
 
-		Map<String, Control> memberMenu = MenuMember.getInstance().menuMap(); // 박진석.
-		Map<String, Control> boardMenu = MenuBoard.getInstance().menuMap(); // 조민성.
-		Map<String, Control> replyMenu = MenuReply.getInstance().menuMap(); // 조민성.
+		Map<String, Control> memberMenu = MemberMenu.getInstance().menuMap();
+		Map<String, Control> boardMenu = BoardMenu.getInstance().menuMap();
+		Map<String, Control> replyMenu = ReplyMenu.getInstance().menuMap();
 
 		map.putAll(memberMenu);// 멤버관련 메뉴추가.
 		map.putAll(boardMenu); // 게시글관련 메뉴추가.

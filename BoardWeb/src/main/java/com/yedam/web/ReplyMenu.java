@@ -19,13 +19,13 @@ import com.yedam.control.board.ModifyBoardControl;
 import com.yedam.control.board.ModifyFormControl;
 import com.yedam.control.board.RemoveControl;
 
-public class MenuReply {
-	private static MenuReply instance = new MenuReply();
+public class ReplyMenu {
+	private static ReplyMenu instance = new ReplyMenu();
 
-	private MenuReply() {
+	private ReplyMenu() {
 	}
 
-	public static MenuReply getInstance() {
+	public static ReplyMenu getInstance() {
 		return instance;
 	}
 

@@ -16,13 +16,13 @@ import com.yedam.control.member.ModifyMemberControl;
 import com.yedam.control.member.RemoveMemberControl;
 
 //회원관련 메뉴와 컨트롤 등록. 팀장.
-public class MenuMember {
-	private static MenuMember instance = new MenuMember();
+public class MemberMenu {
+	private static MemberMenu instance = new MemberMenu();
 
-	private MenuMember() {
+	private MemberMenu() {
 	}
 
-	public static MenuMember getInstance() {
+	public static MemberMenu getInstance() {
 		return instance;
 	}
 
